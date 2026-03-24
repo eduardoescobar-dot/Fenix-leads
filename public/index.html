@@ -313,6 +313,9 @@ var end = texto2.lastIndexOf("}");
 if (start === -1 || end === -1) throw new Error("No se encontraron resultados. Intenta de nuevo.");
 var jsonStr = texto2.slice(start, end + 1);
 
+var parsed = null;
+
+    
 // Reparar si viene cortado
 try {
   var parsed = JSON.parse(jsonStr);
@@ -325,10 +328,6 @@ try {
   catch(e2) { throw new Error("Error al procesar resultados. Intenta de nuevo."); }
 }
 
-
-    var parsed = JSON.parse(match[0]);
-    var leads = parsed.leads || [];
-    if (!leads.length) throw new Error("No se encontraron leads. Intenta ser más específico.");
 
     currentLeads = leads;
     renderLeads(leads, query, parsed.notas||"");
