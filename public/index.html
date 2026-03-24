@@ -19,37 +19,42 @@
     .tab{padding:13px 18px;font-size:13px;font-weight:600;background:none;border:none;color:var(--muted);border-bottom:2px solid transparent;cursor:pointer;font-family:'DM Sans',sans-serif;margin-bottom:-1px;transition:all .2s}
     .tab.active{color:var(--accent);border-bottom-color:var(--accent)}
     .main{max-width:980px;margin:0 auto;padding:28px 20px}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:24px}
-    .label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:20px}
+    .label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
     .srow{display:flex;gap:10px}
-    input[type=text],input[type=password]{background:#0a0914;border:1px solid var(--dim);border-radius:10px;padding:13px 16px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;transition:border-color .2s;width:100%}
-    input:focus{outline:none;border-color:var(--accent)}input::placeholder{color:#2e2a45}
-    .btn-p{border:none;border-radius:10px;padding:13px 22px;font-weight:700;font-size:14px;cursor:pointer;font-family:'Syne',sans-serif;white-space:nowrap;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 20px rgba(249,115,22,.25);transition:all .2s}
+    input[type=text],input[type=password],select{background:#0a0914;border:1px solid var(--dim);border-radius:10px;padding:12px 16px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;transition:border-color .2s;width:100%}
+    select option{background:#0a0914;color:var(--text)}
+    input:focus,select:focus{outline:none;border-color:var(--accent)}
+    input::placeholder{color:#2e2a45}
+    .btn-p{border:none;border-radius:10px;padding:12px 22px;font-weight:700;font-size:14px;cursor:pointer;font-family:'Syne',sans-serif;white-space:nowrap;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 20px rgba(249,115,22,.25);transition:all .2s}
     .btn-p:hover:not(:disabled){opacity:.9;transform:translateY(-1px)}
     .btn-p:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none;background:var(--dim)}
     .btn-s{background:rgba(255,255,255,.04);border:1px solid var(--border)!important;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
     .btn-s:hover{border-color:var(--accent)!important;color:var(--accent)}
-    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;align-items:center}
+    .filters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
     .chip{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--muted);cursor:pointer;transition:all .2s}
     .chip:hover{border-color:var(--accent);color:var(--accent);background:rgba(249,115,22,.06)}
+    .chip.active{border-color:var(--accent);color:var(--accent);background:rgba(249,115,22,.1)}
     .loading{text-align:center;padding:60px 20px;display:none}
     .spinner{width:48px;height:48px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;margin:0 auto 20px;animation:spin .9s linear infinite}
     .err{background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);border-radius:12px;padding:16px 20px;color:#f87171;font-size:13px;text-align:center;display:none;margin-bottom:16px}
-    .rhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+    .rhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px}
     .rtitle{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--white)}
     .rtitle span{color:var(--accent)}
     .twrap{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;overflow-x:auto}
-    table{width:100%;border-collapse:collapse;min-width:600px}
+    table{width:100%;border-collapse:collapse;min-width:650px}
     thead th{text-align:left;padding:11px 15px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--dim)}
     tbody tr{border-bottom:1px solid #0e0d1a;transition:background .15s}
     tbody tr:last-child{border-bottom:none}
     tbody tr:hover td{background:rgba(249,115,22,.035)}
-    td{padding:13px 15px;vertical-align:top}
+    td{padding:12px 15px;vertical-align:top}
     .lname{font-weight:700;color:var(--white);font-size:14px}
     .ltype{display:inline-block;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.2);color:var(--accent);font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-top:4px}
-    .lcontact{color:var(--blue);font-size:12px;word-break:break-all}
+    .lphone{color:var(--green);font-size:13px;font-weight:600}
+    .lemail{color:var(--blue);font-size:12px;margin-top:2px;word-break:break-all}
     .lsource{color:var(--dim);font-size:11px;margin-top:3px}
-    .lrel{color:#5a4a6a;font-size:11.5px;font-style:italic;max-width:180px;line-height:1.5}
+    .notel{color:#3a3050;font-size:11px;font-style:italic}
     .notas{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin-top:16px;font-size:12px;color:var(--muted);font-style:italic}
     .empty{text-align:center;padding:70px 20px}
     .eicon{font-size:52px;opacity:.15;margin-bottom:16px}
@@ -62,6 +67,7 @@
     .dot{width:7px;height:7px;border-radius:50%}
     .dot.ok{background:var(--green);box-shadow:0 0 6px var(--green)}
     .dot.fail{background:#f87171}
+    .tip{background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.15);border-radius:10px;padding:10px 14px;font-size:12px;color:var(--muted);margin-top:12px;line-height:1.6}
     @keyframes spin{to{transform:rotate(360deg)}}
     @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
   </style>
@@ -72,7 +78,7 @@
   <div class="logo">🔥</div>
   <div>
     <div class="htitle">FÉNIX LEAD FINDER</div>
-    <div class="hsub">Prospección inteligente · Powered by Claude AI</div>
+    <div class="hsub">Leads de dueños de negocios reales · Powered by Claude AI</div>
   </div>
   <div class="badge">FÉNIX ACADEMY</div>
 </div>
@@ -88,26 +94,50 @@
   <!-- BUSCAR -->
   <div id="pane-buscar">
     <div class="card">
-      <div class="label">¿Qué tipo de leads buscas?</div>
+      <div class="label">Tipo de negocio</div>
       <div class="srow">
-        <input type="text" id="qInput" placeholder="Ej: Emprendedores latinos en Miami con negocio propio..."/>
+        <input type="text" id="qInput" placeholder="Ej: restaurantes hispanos, salones de belleza, construcción, transporte..."/>
         <button class="btn-p" id="btnB" onclick="buscar()">🔍 Buscar Leads</button>
       </div>
+
+      <!-- FILTROS -->
+      <div class="filters">
+        <div>
+          <div class="label" style="margin-top:14px">Ciudad / Estado</div>
+          <input type="text" id="fCiudad" placeholder="Ej: Houston TX, Miami FL, Atlanta GA..."/>
+        </div>
+        <div>
+          <div class="label" style="margin-top:14px">Fuente de búsqueda</div>
+          <select id="fFuente">
+            <option value="google maps yelp directorios">Google Maps + Yelp + Directorios</option>
+            <option value="google maps">Solo Google Maps</option>
+            <option value="yelp">Solo Yelp</option>
+            <option value="facebook">Facebook Business</option>
+            <option value="instagram">Instagram</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tip">
+        💡 <strong style="color:var(--text)">Para mejores resultados:</strong> Sé específico con el tipo de negocio y la ciudad. Ej: "restaurantes mexicanos en Houston TX" o "talleres mecánicos hispanos en Miami FL"
+      </div>
+
+      <!-- EJEMPLOS RÁPIDOS -->
       <div class="chips">
-        <span style="font-size:11px;color:var(--dim)">Ejemplos:</span>
-        <span class="chip" onclick="setQ(this)">Coaches de negocios latinos en Instagram</span>
-        <span class="chip" onclick="setQ(this)">Dueños de negocios hispanos en Texas</span>
-        <span class="chip" onclick="setQ(this)">Emprendedores latinoamericanos con podcast</span>
-        <span class="chip" onclick="setQ(this)">Consultores de marketing digital en Colombia</span>
-        <span class="chip" onclick="setQ(this)">Dueños de pequeñas empresas en Florida</span>
-        <span class="chip" onclick="setQ(this)">Mentores de emprendimiento en México</span>
+        <span style="font-size:11px;color:var(--dim)">Ejemplos rápidos:</span>
+        <span class="chip" onclick="setEjemplo('restaurantes mexicanos','Houston TX')">🍽️ Restaurantes en Houston</span>
+        <span class="chip" onclick="setEjemplo('salones de belleza hispanos','Miami FL')">💅 Salones en Miami</span>
+        <span class="chip" onclick="setEjemplo('contratistas de construcción latinos','Atlanta GA')">🏗️ Construcción en Atlanta</span>
+        <span class="chip" onclick="setEjemplo('tiendas de ropa latina','Los Angeles CA')">👕 Tiendas en Los Angeles</span>
+        <span class="chip" onclick="setEjemplo('talleres mecánicos hispanos','Dallas TX')">🔧 Talleres en Dallas</span>
+        <span class="chip" onclick="setEjemplo('lavanderías latinas','Chicago IL')">🧺 Lavanderías en Chicago</span>
       </div>
     </div>
 
     <div class="loading" id="loadDiv">
       <div class="spinner"></div>
-      <div style="color:var(--accent);font-family:'Syne',sans-serif;font-weight:800;font-size:15px;margin-bottom:8px">BUSCANDO EN LA WEB...</div>
-      <div style="color:var(--muted);font-size:13px">Claude está rastreando fuentes en tiempo real</div>
+      <div style="color:var(--accent);font-family:'Syne',sans-serif;font-weight:800;font-size:15px;margin-bottom:8px">BUSCANDO EN DIRECTORIOS...</div>
+      <div style="color:var(--muted);font-size:13px">Extrayendo nombres, teléfonos y contactos reales</div>
     </div>
 
     <div class="err" id="errDiv">
@@ -117,16 +147,27 @@
 
     <div id="resDiv" style="display:none">
       <div class="rhead">
-        <div><span class="rtitle"><span id="resCount">0</span> leads encontrados</span>
-        <span style="font-size:12px;color:var(--muted);margin-left:10px" id="resQuery"></span></div>
+        <div>
+          <span class="rtitle"><span id="resCount">0</span> leads encontrados</span>
+          <span style="font-size:12px;color:var(--muted);margin-left:10px" id="resQuery"></span>
+        </div>
         <div style="display:flex;gap:8px">
           <button class="btn-s" id="btnCopy" onclick="copiar()">📋 Copiar</button>
-          <button class="btn-s" onclick="exportCSV(currentLeads,currentQuery)">⬇️ CSV</button>
+          <button class="btn-s" onclick="doExportCSV()">⬇️ CSV</button>
         </div>
       </div>
       <div class="twrap">
         <table>
-          <thead><tr><th>#</th><th>Nombre / Tipo</th><th>Ubicación</th><th>Contacto</th><th>Relevancia</th></tr></thead>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Negocio / Tipo</th>
+              <th>Ubicación</th>
+              <th>📞 Teléfono</th>
+              <th>Email / Web</th>
+              <th>Fuente</th>
+            </tr>
+          </thead>
           <tbody id="leadsBody"></tbody>
         </table>
       </div>
@@ -138,14 +179,14 @@
 
     <div class="empty" id="emptyDiv">
       <div class="eicon">🔥</div>
-      <p class="etext">Describe el tipo de prospecto ideal para Fénix Academy<br/>y Claude saldrá a buscarlos en la web en tiempo real</p>
+      <p class="etext">Busca dueños de negocios reales con teléfono<br/>desde Google Maps, Yelp y directorios hispanos</p>
     </div>
   </div>
 
   <!-- HISTORIAL -->
   <div id="pane-historial" style="display:none">
     <div id="histList">
-      <div class="empty"><div class="eicon">📋</div><p class="etext">Aún no hay búsquedas.<br/>Haz tu primera búsqueda y aparecerá aquí.</p></div>
+      <div class="empty"><div class="eicon">📋</div><p class="etext">Aún no hay búsquedas.</p></div>
     </div>
   </div>
 
@@ -154,12 +195,11 @@
     <div class="card" style="margin-bottom:0">
       <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--white);margin-bottom:6px">🔑 API Key de Anthropic</div>
       <div style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.6">
-        En EasyPanel la clave va en Environment Variables como <code style="background:rgba(255,255,255,.07);padding:2px 6px;border-radius:4px">ANTHROPIC_API_KEY</code>.<br/>
-        Para pruebas locales puedes ingresarla aquí:
+        En EasyPanel la clave va en Environment Variables como <code style="background:rgba(255,255,255,.07);padding:2px 6px;border-radius:4px">ANTHROPIC_API_KEY</code>.
       </div>
       <div style="display:flex;gap:10px;align-items:center">
         <input type="password" id="keyInput" placeholder="sk-ant-api03-..." style="max-width:420px"/>
-        <button class="btn-p" style="padding:13px 20px" onclick="saveKey()">Guardar</button>
+        <button class="btn-p" style="padding:12px 20px" onclick="saveKey()">Guardar</button>
       </div>
       <div id="keyStatus"></div>
       <hr style="border:none;border-top:1px solid var(--border);margin:24px 0"/>
@@ -174,93 +214,109 @@
 var currentLeads = [], currentQuery = "";
 var hist = JSON.parse(localStorage.getItem("fx_h") || "[]");
 
-// TABS
 function switchTab(name, el) {
-  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(function(t){ t.classList.remove("active"); });
   el.classList.add("active");
-  ["buscar","historial","config"].forEach(p => {
+  ["buscar","historial","config"].forEach(function(p){
     document.getElementById("pane-"+p).style.display = p===name ? "block" : "none";
   });
   if (name === "historial") renderHist();
 }
 
-function setQ(el) { document.getElementById("qInput").value = el.textContent; }
+function setEjemplo(tipo, ciudad) {
+  document.getElementById("qInput").value = tipo;
+  document.getElementById("fCiudad").value = ciudad;
+}
 
-function show(id) { document.getElementById(id).style.display = "block"; }
-function hide(id) { document.getElementById(id).style.display = "none"; }
+function show(id){ document.getElementById(id).style.display="block"; }
+function hide(id){ document.getElementById(id).style.display="none"; }
 
-// API CALL
 async function callClaude(payload) {
   if (window.location.protocol !== "file:") {
-    // EasyPanel mode - use proxy
     var res = await fetch("/api/claude", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
       body: JSON.stringify(payload)
     });
     var data = await res.json();
-    if (!res.ok) throw new Error(typeof data.error === "string" ? data.error : JSON.stringify(data.error || data));
+    if (!res.ok) throw new Error(typeof data.error==="string" ? data.error : JSON.stringify(data.error||data));
     return data;
   }
-  // Local mode
-  var key = localStorage.getItem("fx_k") || "";
+  var key = localStorage.getItem("fx_k")||"";
   if (!key) throw new Error("Configura tu API Key en ⚙️ Config");
-  var res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": key,
-      "anthropic-version": "2023-06-01",
-      "anthropic-beta": "web-search-2025-03-05",
-      "anthropic-dangerous-direct-browser-access": "true"
+  var res = await fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json",
+      "x-api-key":key,
+      "anthropic-version":"2023-06-01",
+      "anthropic-beta":"web-search-2025-03-05",
+      "anthropic-dangerous-direct-browser-access":"true"
     },
     body: JSON.stringify(payload)
   });
   var data = await res.json();
-  if (!res.ok) throw new Error(data.error?.message || JSON.stringify(data.error || data));
+  if (!res.ok) throw new Error(data.error?.message||JSON.stringify(data.error||data));
   return data;
 }
 
-// BUSCAR - single call
 async function buscar() {
-  var query = document.getElementById("qInput").value.trim();
-  if (!query) return;
+  var tipo = document.getElementById("qInput").value.trim();
+  var ciudad = document.getElementById("fCiudad").value.trim();
+  var fuente = document.getElementById("fFuente").value;
+  if (!tipo) return;
+
+  var query = tipo + (ciudad ? " en " + ciudad : "");
   currentQuery = query;
 
   hide("emptyDiv"); hide("errDiv"); hide("resDiv");
   show("loadDiv");
   document.getElementById("btnB").disabled = true;
 
+  var systemPrompt = "Eres un experto en encontrar leads de dueños de negocios reales para Fénix Academy.\n\n" +
+    "OBJETIVO: Encontrar dueños de pequeños negocios hispanos/latinos que NECESITAN educación empresarial.\n\n" +
+    "BUSCA EN: " + fuente + "\n" +
+    "TIPO DE NEGOCIO: " + tipo + "\n" +
+    (ciudad ? "CIUDAD/ESTADO: " + ciudad + "\n" : "") +
+    "\nREGLAS IMPORTANTES:\n" +
+    "- Busca negocios REALES con teléfono público (Google Maps, Yelp, directorios de negocios)\n" +
+    "- Prioriza negocios con dueño hispano/latino identificable\n" +
+    "- NO incluyas coaches, consultores ni gente que ya vende educación\n" +
+    "- El teléfono es el campo MÁS IMPORTANTE - busca en directorios que lo tengan\n" +
+    "- Si no hay teléfono, pon el sitio web o Instagram del negocio\n\n" +
+    "Devuelve ÚNICAMENTE este JSON sin markdown:\n" +
+    "{\"leads\":[{\"nombre\":\"Nombre del negocio\",\"dueno\":\"Nombre del dueño si lo encuentras\",\"tipo\":\"Tipo de negocio\",\"ubicacion\":\"Ciudad, Estado\",\"telefono\":\"(555) 123-4567\",\"contacto\":\"email o web o instagram\",\"fuente\":\"URL donde lo encontraste\",\"relevancia\":\"Por qué necesita Fénix Academy\"}],\"notas\":\"string\"}\n" +
+    "Máximo 6 leads. Si no hay teléfono escribe 'No disponible' en ese campo.";
+
   try {
     var resp = await callClaude({
       model: "claude-haiku-4-5-20251001",
       max_tokens: 1000,
       tools: [{ type: "web_search_20250305", name: "web_search" }],
-      system: "Eres un buscador de leads para Fénix Academy (academia de negocios para emprendedores hispanos 28-45 años). Busca prospectos reales y devuelve ÚNICAMENTE este JSON sin markdown ni texto extra:\n{\"leads\":[{\"nombre\":\"string\",\"tipo\":\"string\",\"ubicacion\":\"string\",\"contacto\":\"string\",\"fuente\":\"string\",\"relevancia\":\"string\"}],\"notas\":\"string\"}\nMáximo 6 leads.",
-      messages: [{ role: "user", content: "Busca leads de: " + query }]
+      system: systemPrompt,
+      messages: [{ role: "user", content: "Busca leads de " + query + " con teléfono en " + fuente }]
     });
 
-    // Extract text from all blocks
-    var texto = (resp.content || [])
-      .filter(function(b){ return b.type === "text"; })
-      .map(function(b){ return b.text || ""; })
+    var texto = (resp.content||[])
+      .filter(function(b){ return b.type==="text"; })
+      .map(function(b){ return b.text||""; })
       .join("")
-      .replace(/```json|```/gi, "")
+      .replace(/```json|```/gi,"")
       .trim();
 
     var match = texto.match(/\{[\s\S]*\}/);
-    if (!match) throw new Error("No se encontraron resultados. Intenta con términos más específicos.");
+    if (!match) throw new Error("No se encontraron resultados. Intenta con otros términos o ciudad.");
 
     var parsed = JSON.parse(match[0]);
     var leads = parsed.leads || [];
-    if (!leads.length) throw new Error("No se encontraron leads. Intenta con otros términos.");
+    if (!leads.length) throw new Error("No se encontraron leads. Intenta ser más específico.");
 
     currentLeads = leads;
-    renderLeads(leads, query, parsed.notas || "");
-    saveHist(query, leads, parsed.notas || "");
+    renderLeads(leads, query, parsed.notas||"");
+    saveHist(query, leads, parsed.notas||"");
 
   } catch(e) {
-    document.getElementById("errMsg").textContent = e.message || "Error desconocido";
+    document.getElementById("errMsg").textContent = e.message||"Error desconocido";
     show("errDiv");
   } finally {
     hide("loadDiv");
@@ -268,90 +324,108 @@ async function buscar() {
   }
 }
 
-// RENDER
-function esc(s) {
-  return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-}
+function esc(s){ return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
 function renderLeads(leads, query, notas) {
   document.getElementById("resCount").textContent = leads.length;
-  document.getElementById("resQuery").textContent = '"' + query + '"';
+  document.getElementById("resQuery").textContent = '"'+query+'"';
   document.getElementById("leadsBody").innerHTML = leads.map(function(l,i){
-    return "<tr><td style='color:var(--dim);font-weight:700;font-size:12px'>"+(i+1)+"</td><td><div class='lname'>"+esc(l.nombre)+"</div><div class='ltype'>"+esc(l.tipo)+"</div></td><td style='color:#7a6a8a;font-size:13px'>"+esc(l.ubicacion)+"</td><td><div class='lcontact'>"+esc(l.contacto)+"</div><div class='lsource'>"+esc(l.fuente)+"</div></td><td class='lrel'>"+esc(l.relevancia)+"</td></tr>";
+    var phone = l.telefono && l.telefono !== "No disponible"
+      ? "<div class='lphone'>📞 "+esc(l.telefono)+"</div>"
+      : "<div class='notel'>Sin teléfono</div>";
+    var dueno = l.dueno ? "<div style='font-size:11px;color:var(--muted);margin-top:3px'>👤 "+esc(l.dueno)+"</div>" : "";
+    return "<tr>" +
+      "<td style='color:var(--dim);font-weight:700;font-size:12px'>"+(i+1)+"</td>" +
+      "<td><div class='lname'>"+esc(l.nombre)+"</div><div class='ltype'>"+esc(l.tipo)+"</div>"+dueno+"</td>" +
+      "<td style='color:#7a6a8a;font-size:13px'>"+esc(l.ubicacion)+"</td>" +
+      "<td>"+phone+"</td>" +
+      "<td><div class='lemail'>"+esc(l.contacto)+"</div></td>" +
+      "<td><div class='lsource'>"+esc(l.fuente)+"</div></td>" +
+      "</tr>";
   }).join("");
-  if (notas) { document.getElementById("notasText").textContent = notas; show("notasDiv"); }
+  if (notas){ document.getElementById("notasText").textContent=notas; show("notasDiv"); }
   else hide("notasDiv");
   hide("emptyDiv");
   show("resDiv");
 }
 
-// HISTORIAL
 function saveHist(query, leads, notas) {
-  hist.unshift({ id: Date.now(), query: query, leads: leads, notas: notas, fecha: new Date().toLocaleString("es-MX",{dateStyle:"short",timeStyle:"short"}) });
-  if (hist.length > 20) hist = hist.slice(0,20);
+  hist.unshift({ id:Date.now(), query:query, leads:leads, notas:notas, fecha:new Date().toLocaleString("es-MX",{dateStyle:"short",timeStyle:"short"}) });
+  if (hist.length>20) hist=hist.slice(0,20);
   localStorage.setItem("fx_h", JSON.stringify(hist));
   document.getElementById("tabHistBtn").textContent = "📋 Historial ("+hist.length+")";
 }
 
 function renderHist() {
   var el = document.getElementById("histList");
-  if (!hist.length) { el.innerHTML = "<div class='empty'><div class='eicon'>📋</div><p class='etext'>Aún no hay búsquedas.</p></div>"; return; }
+  if (!hist.length){ el.innerHTML="<div class='empty'><div class='eicon'>📋</div><p class='etext'>Aún no hay búsquedas.</p></div>"; return; }
   el.innerHTML = hist.map(function(item){
-    return "<div class='hitem' onclick='loadHist("+item.id+")'><div><div style='font-family:Syne,sans-serif;font-weight:700;color:var(--white);font-size:14px;margin-bottom:4px'>\""+esc(item.query)+"\"</div><div style='font-size:12px;color:var(--muted)'>"+item.fecha+" · <span style='color:var(--accent)'>"+item.leads.length+" leads</span></div></div><div style='display:flex;gap:8px'><button class='btn-s' onclick='event.stopPropagation();exportCSV("+JSON.stringify(item.leads).replace(/'/g,"&#39;")+",\""+esc(item.query)+"\")'>⬇️ CSV</button><button class='btn-s' style='color:var(--accent)' onclick='loadHist("+item.id+")'>Ver →</button></div></div>";
+    var phoneCount = item.leads.filter(function(l){ return l.telefono && l.telefono!=="No disponible"; }).length;
+    return "<div class='hitem' onclick='loadHist("+item.id+")'>" +
+      "<div><div style='font-family:Syne,sans-serif;font-weight:700;color:var(--white);font-size:14px;margin-bottom:4px'>\""+esc(item.query)+"\"</div>" +
+      "<div style='font-size:12px;color:var(--muted)'>"+item.fecha+" · <span style='color:var(--accent)'>"+item.leads.length+" leads</span> · <span style='color:var(--green)'>"+phoneCount+" con teléfono</span></div></div>" +
+      "<div style='display:flex;gap:8px'><button class='btn-s' onclick='event.stopPropagation();exportCSV("+item.id+")'>⬇️ CSV</button>" +
+      "<button class='btn-s' style='color:var(--accent)' onclick='loadHist("+item.id+")'>Ver →</button></div></div>";
   }).join("");
-  document.getElementById("tabHistBtn").textContent = "📋 Historial ("+hist.length+")";
 }
 
 function loadHist(id) {
-  var item = hist.find(function(h){ return h.id === id; });
+  var item = hist.find(function(h){ return h.id===id; });
   if (!item) return;
-  currentLeads = item.leads; currentQuery = item.query;
-  document.getElementById("qInput").value = item.query;
-  renderLeads(item.leads, item.query, item.notas);
-  switchTab("buscar", document.querySelectorAll(".tab")[0]);
+  currentLeads=item.leads; currentQuery=item.query;
+  document.getElementById("qInput").value=item.query;
+  renderLeads(item.leads,item.query,item.notas);
+  switchTab("buscar",document.querySelectorAll(".tab")[0]);
 }
 
 function clearH() {
   if (!confirm("¿Borrar todo el historial?")) return;
-  hist = []; localStorage.removeItem("fx_h"); renderHist();
+  hist=[]; localStorage.removeItem("fx_h"); renderHist();
 }
 
-// EXPORT
-function exportCSV(leads, name) {
-  var cols = ["#","Nombre","Tipo","Ubicación","Contacto","Fuente","Relevancia"];
+function doExportCSV(){ makeCSV(currentLeads, currentQuery); }
+function exportCSV(id) {
+  var item = hist.find(function(h){ return h.id===id; });
+  if (item) makeCSV(item.leads, item.query);
+}
+
+function makeCSV(leads, name) {
+  var cols = ["#","Negocio","Dueño","Tipo","Ubicación","Teléfono","Email/Web","Fuente","Relevancia"];
   var rows = leads.map(function(l,i){
-    return [i+1,l.nombre,l.tipo,l.ubicacion,l.contacto,l.fuente,l.relevancia].map(function(v){ return '"'+String(v||"").replace(/"/g,'""')+'"'; }).join(",");
+    return [i+1,l.nombre,l.dueno||"",l.tipo,l.ubicacion,l.telefono||"",l.contacto,l.fuente,l.relevancia]
+      .map(function(v){ return '"'+String(v||"").replace(/"/g,'""')+'"'; }).join(",");
   });
   var blob = new Blob([[cols.join(",")].concat(rows).join("\n")],{type:"text/csv;charset=utf-8;"});
   var a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "leads-fenix-"+(name||"").slice(0,20).replace(/\s/g,"-")+".csv";
+  a.href=URL.createObjectURL(blob);
+  a.download="leads-fenix-"+(name||"").slice(0,20).replace(/\s/g,"-")+".csv";
   a.click();
 }
 
 function copiar() {
-  navigator.clipboard.writeText(currentLeads.map(function(l,i){ return (i+1)+". "+l.nombre+" | "+l.tipo+" | "+l.ubicacion+" | "+l.contacto; }).join("\n")).then(function(){
-    var b = document.getElementById("btnCopy");
-    b.textContent = "✓ Copiado"; b.style.color = "var(--green)";
+  var text = currentLeads.map(function(l,i){
+    return (i+1)+". "+l.nombre+" | "+(l.telefono||"Sin tel")+" | "+l.ubicacion+" | "+l.contacto;
+  }).join("\n");
+  navigator.clipboard.writeText(text).then(function(){
+    var b=document.getElementById("btnCopy");
+    b.textContent="✓ Copiado"; b.style.color="var(--green)";
     setTimeout(function(){ b.textContent="📋 Copiar"; b.style.color=""; },2000);
   });
 }
 
-// CONFIG
 function saveKey() {
-  var k = document.getElementById("keyInput").value.trim();
-  if (!k.startsWith("sk-ant-")) { showKS(false,"Clave inválida. Debe empezar con sk-ant-"); return; }
-  localStorage.setItem("fx_k", k);
-  document.getElementById("keyInput").value = "";
+  var k=document.getElementById("keyInput").value.trim();
+  if (!k.startsWith("sk-ant-")){ showKS(false,"Clave inválida."); return; }
+  localStorage.setItem("fx_k",k);
+  document.getElementById("keyInput").value="";
   showKS(true,"API Key guardada ✓");
 }
-function showKS(ok, msg) {
-  document.getElementById("keyStatus").innerHTML = "<div class='asta "+(ok?"ok":"fail")+"'><div class='dot "+(ok?"ok":"fail")+"'></div>"+msg+"</div>";
+function showKS(ok,msg){
+  document.getElementById("keyStatus").innerHTML="<div class='asta "+(ok?"ok":"fail")+"'><div class='dot "+(ok?"ok":"fail")+"'></div>"+msg+"</div>";
 }
 
-// INIT
-document.getElementById("tabHistBtn").textContent = "📋 Historial ("+hist.length+")";
-document.getElementById("qInput").addEventListener("keydown", function(e){ if(e.key==="Enter") buscar(); });
+document.getElementById("tabHistBtn").textContent="📋 Historial ("+hist.length+")";
+document.getElementById("qInput").addEventListener("keydown",function(e){ if(e.key==="Enter") buscar(); });
 if (localStorage.getItem("fx_k")) showKS(true,"API Key configurada ✓");
 </script>
 </body>
