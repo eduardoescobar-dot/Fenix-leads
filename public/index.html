@@ -291,7 +291,7 @@ async function buscar() {
   try {
     var resp = await callClaude({
       model: "claude-haiku-4-5-20251001",
-      max_tokens: 1000,
+      max_tokens: 1300,
       tools: [{ type: "web_search_20250305", name: "web_search" }],
       system: systemPrompt,
       messages: [{ role: "user", content: "Busca leads de " + query + " con teléfono en " + fuente }]
