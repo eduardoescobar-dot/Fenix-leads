@@ -260,8 +260,65 @@ async function callClaude(payload) {
   return data;
 }
 
+// Construye el prompt para una ronda específica con ángulo diferente
+function buildPrompt(tipo, ciudad, fuente, angulo) {
+  var zonas = {
+    "norte": ciudad ? "zona norte de " + ciudad : "norte del estado",
+    "sur":   ciudad ? "zona sur de "   + ciudad : "sur del estado",
+    "centro":ciudad ? "centro de "     + ciudad : "área central"
+  };
+  var zona = zonas[angulo] || (ciudad || "");
+  return {
+    system:
+      "Eres un extractor de leads de negocios reales. Solo devuelves JSON, sin explicaciones ni markdown.\n" +
+      "BUSCA EN: " + fuente + "\n" +
+      "TIPO: " + tipo + "\n" +
+      (ciudad ? "ÁREA: " + zona + "\n" : "") +
+      "REGLAS: negocios reales con teléfono público · dueño hispano/latino · NO coaches ni educadores\n" +
+      "El teléfono es lo más importante. Si no hay, pon sitio web o Instagram.\n" +
+      "Devuelve SOLO este JSON (sin texto extra, sin markdown):\n" +
+      "{\"leads\":[{\"nombre\":\"\",\"dueno\":\"\",\"tipo\":\"\",\"ubicacion\":\"\",\"telefono\":\"\",\"contacto\":\"\",\"fuente\":\"\",\"relevancia\":\"\"}],\"notas\":\"\"}",
+    user: "Encuentra 5 negocios de tipo \"" + tipo + "\" en " + zona + " con teléfono. Fuente: " + fuente
+  };
+}
+
+// Parsea la respuesta de Claude a un array de leads
+function parseResp(resp) {
+  var texto = (resp.content||[])
+    .filter(function(b){ return b.type==="text"; })
+    .map(function(b){ return b.text||""; })
+    .join("")
+    .replace(/```json|```/gi,"")
+    .trim();
+  var start = texto.indexOf("{");
+  var end   = texto.lastIndexOf("}");
+  if (start === -1 || end === -1) return [];
+  var jsonStr = texto.slice(start, end + 1);
+  try {
+    return JSON.parse(jsonStr).leads || [];
+  } catch(e) {
+    // intento de reparación
+    var ob = (jsonStr.match(/\[/g)||[]).length - (jsonStr.match(/\]/g)||[]).length;
+    var oc = (jsonStr.match(/\{/g)||[]).length - (jsonStr.match(/\}/g)||[]).length;
+    for(var i=0;i<ob;i++) jsonStr += "]";
+    for(var i=0;i<oc;i++) jsonStr += "}";
+    try { return JSON.parse(jsonStr).leads || []; } catch(e2) { return []; }
+  }
+}
+
+// Deduplica por nombre de negocio
+function dedup(leads) {
+  var seen = {};
+  return leads.filter(function(l) {
+    var key = (l.nombre||"").toLowerCase().trim();
+    if (!key || seen[key]) return false;
+    seen[key] = true;
+    return true;
+  });
+}
+
 async function buscar() {
-  var tipo = document.getElementById("qInput").value.trim();
+  var tipo   = document.getElementById("qInput").value.trim();
   var ciudad = document.getElementById("fCiudad").value.trim();
   var fuente = document.getElementById("fFuente").value;
   if (!tipo) return;
@@ -273,65 +330,30 @@ async function buscar() {
   show("loadDiv");
   document.getElementById("btnB").disabled = true;
 
-  var systemPrompt = "Eres un experto en encontrar leads de dueños de negocios reales para Fénix Academy.\n\n" +
-    "OBJETIVO: Encontrar dueños de pequeños negocios hispanos/latinos que NECESITAN educación empresarial.\n\n" +
-    "BUSCA EN: " + fuente + "\n" +
-    "TIPO DE NEGOCIO: " + tipo + "\n" +
-    (ciudad ? "CIUDAD/ESTADO: " + ciudad + "\n" : "") +
-    "\nREGLAS IMPORTANTES:\n" +
-    "- Busca negocios REALES con teléfono público (Google Maps, Yelp, directorios de negocios)\n" +
-    "- Prioriza negocios con dueño hispano/latino identificable\n" +
-    "- NO incluyas coaches, consultores ni gente que ya vende educación\n" +
-    "- El teléfono es el campo MÁS IMPORTANTE - busca en directorios que lo tengan\n" +
-    "- Si no hay teléfono, pon el sitio web o Instagram del negocio\n\n" +
-    "Devuelve ÚNICAMENTE este JSON sin markdown:\n" +
-    "{\"leads\":[{\"nombre\":\"Nombre del negocio\",\"dueno\":\"Nombre del dueño si lo encuentras\",\"tipo\":\"Tipo de negocio\",\"ubicacion\":\"Ciudad, Estado\",\"telefono\":\"(555) 123-4567\",\"contacto\":\"email o web o instagram\",\"fuente\":\"URL donde lo encontraste\",\"relevancia\":\"Por qué necesita Fénix Academy\"}],\"notas\":\"string\"}\n" +
-    "Máximo 6 leads. Si no hay teléfono escribe 'No disponible' en ese campo.";
-
-  try {
-    var resp = await callClaude({
+  // 3 llamadas paralelas con ángulos distintos: norte, sur, centro
+  var angulos = ["norte", "sur", "centro"];
+  var promesas = angulos.map(function(angulo) {
+    var p = buildPrompt(tipo, ciudad, fuente, angulo);
+    return callClaude({
       model: "claude-haiku-4-5-20251001",
       max_tokens: 1300,
       tools: [{ type: "web_search_20250305", name: "web_search" }],
-      system: systemPrompt,
-      messages: [{ role: "user", content: "Busca leads de " + query + " con teléfono en " + fuente }]
-    });
+      system: p.system,
+      messages: [{ role: "user", content: p.user }]
+    }).then(parseResp).catch(function(){ return []; }); // si una falla, devuelve vacío
+  });
 
-    var texto = (resp.content||[])
-      .filter(function(b){ return b.type==="text"; })
-      .map(function(b){ return b.text||""; })
-      .join("")
-      .replace(/```json|```/gi,"")
-      .trim();
+  try {
+    var resultados = await Promise.all(promesas);
+    // Combinar y deduplicar
+    var todos = [].concat.apply([], resultados);
+    var leads  = dedup(todos);
 
-   // Limpiar y reparar JSON incompleto
-var texto2 = texto.replace(/```json|```/gi,"").trim();
-
-// Extraer solo el JSON
-var start = texto2.indexOf("{");
-var end = texto2.lastIndexOf("}");
-if (start === -1 || end === -1) throw new Error("No se encontraron resultados. Intenta de nuevo.");
-var jsonStr = texto2.slice(start, end + 1);
-
-var parsed = null;
-
-    
-// Reparar si viene cortado
-try {
-  var parsed = JSON.parse(jsonStr);
-} catch(e) {
-  var openBrackets = (jsonStr.match(/\[/g)||[]).length - (jsonStr.match(/\]/g)||[]).length;
-  var openBraces = (jsonStr.match(/\{/g)||[]).length - (jsonStr.match(/\}/g)||[]).length;
-  for(var i=0;i<openBrackets;i++) jsonStr += "]";
-  for(var i=0;i<openBraces;i++) jsonStr += "}";
-  try { var parsed = JSON.parse(jsonStr); }
-  catch(e2) { throw new Error("Error al procesar resultados. Intenta de nuevo."); }
-}
-
+    if (!leads.length) throw new Error("No se encontraron resultados. Intenta con otra búsqueda.");
 
     currentLeads = leads;
-    renderLeads(leads, query, parsed.notas||"");
-    saveHist(query, leads, parsed.notas||"");
+    renderLeads(leads, query, "");
+    saveHist(query, leads, "");
 
   } catch(e) {
     document.getElementById("errMsg").textContent = e.message||"Error desconocido";
