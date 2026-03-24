@@ -282,37 +282,29 @@ async function buscar() {
   document.getElementById("btnBuscar").disabled = true;
 
 try {
-    // STEP 1: search
     setStep("searching");
-    const searchResp = await callClaude({
+    const resp = await callClaude({
       model: "claude-haiku-4-5-20251001",
-      max_tokens: 1500,
+      max_tokens: 1000,
       tools: [{ type: "web_search_20250305", name: "web_search" }],
-      system: `Eres un experto en prospección de leads para Fénix Academy, plataforma de educación empresarial para emprendedores hispanos de 28-45 años.
-Busca en internet y encuentra prospectos REALES para: ${query}
-Para cada prospecto incluye: nombre completo o empresa, tipo de perfil/negocio, ciudad y país, contacto (email / Instagram / LinkedIn / web), y por qué es buen candidato para una academia de negocios hispanohablante.
-Encuentra mínimo 8 prospectos reales y verificables.`,
-      messages: [{ role: "user", content: `Busca leads de: ${query}` }],
+      system: `Busca leads para Fénix Academy (academia de negocios para emprendedores hispanos 28-45 años).
+Busca: ${query}
+Responde ÚNICAMENTE con este JSON puro, sin texto extra, sin markdown:
+{"leads":[{"nombre":"string","tipo":"string","ubicacion":"string","contacto":"string","fuente":"string","relevancia":"string"}],"notas":"string"}
+Máximo 6 leads.`,
+      messages: [{ role: "user", content: `Busca y devuelve JSON de leads: ${query}` }],
     });
 
-const rawText = extractText(searchResp);
-if (!rawText) throw new Error("No se obtuvieron resultados. La búsqueda web no devolvió texto.");
+    const texto = extractText(resp).replace(/```json|```/gi,"").trim();
+    const match = texto.match(/\{[\s\S]*\}/);
+    if (!match) throw new Error("No se encontraron leads. Intenta con otros términos.");
+    const parsed = JSON.parse(match[0]);
+    const leads = parsed.leads || [];
+    if (!leads.length) throw new Error("No se encontraron leads. Intenta con otros términos.");
 
-// ← AGREGA ESTA LÍNEA:
-const rawTruncated = rawText.slice(0, 3000);
-
-// Esperar 4 segundos antes del segundo llamado
-await new Promise(r => setTimeout(r, 4000));
-
-// STEP 2: format
-setStep("formatting");
-const formatResp = await callClaude({
-  model: "claude-haiku-4-5-20251001",
-  max_tokens: 1000,
-  system: `Convierte el texto en JSON puro. Sin markdown, sin backticks. Solo el JSON.
-Formato: {"leads":[{"nombre":"string","tipo":"string","ubicacion":"string","contacto":"string","fuente":"string","relevancia":"string"}],"notas":"string"}`,
-  messages: [{ role: "user", content: `Convierte a JSON:\n\n${rawTruncated}` }],
-});
+    currentLeads = leads;
+    renderLeads(leads, query, parsed.notas || "");
+    saveH(query, leads, parsed.notas || "");
 
 
     const formatText = extractText(formatResp)
