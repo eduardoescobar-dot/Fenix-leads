@@ -285,7 +285,7 @@ async function buscar() {
     // STEP 1: search
     setStep("searching");
     const searchResp = await callClaude({
-      model: "claude-sonnet-4-20250514",
+      model: "claude-haiku-4-5-20251001",
       max_tokens: 1500,
       tools: [{ type: "web_search_20250305", name: "web_search" }],
       system: `Eres un experto en prospección de leads para Fénix Academy, plataforma de educación empresarial para emprendedores hispanos de 28-45 años.
@@ -301,7 +301,7 @@ Encuentra mínimo 8 prospectos reales y verificables.`,
     // STEP 2: format
     setStep("formatting");
     const formatResp = await callClaude({
-      model: "claude-sonnet-4-20250514",
+      model: "claude-haiku-4-5-20251001",
       max_tokens: 1500,
       system: `Eres un formateador de datos. Convierte el texto recibido en JSON puro.
 Responde ÚNICAMENTE con el JSON, sin markdown, sin backticks, sin texto extra.
