@@ -1,78 +1,69 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fénix Lead Finder</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --bg:#08070e; --card:#100f1a; --border:#1c1a2c; --dim:#2a2640;
-      --muted:#4a4068; --text:#ddd4f0; --white:#f0eaff;
-      --accent:#f97316; --accent2:#dc2626; --blue:#7bc8f6; --green:#4ade80;
-    }
+    :root{--bg:#08070e;--card:#100f1a;--border:#1c1a2c;--dim:#2a2640;--muted:#4a4068;--text:#ddd4f0;--white:#f0eaff;--accent:#f97316;--accent2:#dc2626;--blue:#7bc8f6;--green:#4ade80}
     *{box-sizing:border-box;margin:0;padding:0}
     body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
-    ::-webkit-scrollbar{width:5px} ::-webkit-scrollbar-track{background:var(--bg)} ::-webkit-scrollbar-thumb{background:var(--dim);border-radius:3px}
-    .header{background:linear-gradient(135deg,#0d0c1e,#160a08);border-bottom:1px solid var(--border);padding:18px 32px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100}
-    .logo{width:42px;height:42px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 4px 24px rgba(249,115,22,0.3);flex-shrink:0}
-    .header-title{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;color:var(--white)}
-    .header-sub{font-size:11px;color:var(--muted);margin-top:1px}
-    .badge{margin-left:auto;background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.25);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:1.5px;padding:4px 12px;border-radius:20px}
-    .tabs{display:flex;background:var(--card);border-bottom:1px solid var(--border);padding:0 32px}
-    .tab{padding:13px 20px;font-size:13px;font-weight:600;background:none;border:none;color:var(--muted);border-bottom:2px solid transparent;cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;margin-bottom:-1px}
+    ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--dim);border-radius:3px}
+    .header{background:linear-gradient(135deg,#0d0c1e,#160a08);border-bottom:1px solid var(--border);padding:18px 28px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100}
+    .logo{width:42px;height:42px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 4px 24px rgba(249,115,22,.3);flex-shrink:0}
+    .htitle{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;color:var(--white)}
+    .hsub{font-size:11px;color:var(--muted);margin-top:1px}
+    .badge{margin-left:auto;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.25);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:1.5px;padding:4px 12px;border-radius:20px}
+    .tabs{display:flex;background:var(--card);border-bottom:1px solid var(--border);padding:0 28px}
+    .tab{padding:13px 18px;font-size:13px;font-weight:600;background:none;border:none;color:var(--muted);border-bottom:2px solid transparent;cursor:pointer;font-family:'DM Sans',sans-serif;margin-bottom:-1px;transition:all .2s}
     .tab.active{color:var(--accent);border-bottom-color:var(--accent)}
-    .main{max-width:980px;margin:0 auto;padding:32px 24px}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px}
+    .main{max-width:980px;margin:0 auto;padding:28px 20px}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:24px}
     .label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
-    .search-row{display:flex;gap:10px}
-    input[type=text],input[type=password]{background:#0a0914;border:1px solid var(--dim);border-radius:10px;padding:13px 16px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;transition:border-color 0.2s;width:100%}
-    input:focus{outline:none;border-color:var(--accent)} input::placeholder{color:#2e2a45}
-    .btn{border:none;border-radius:10px;padding:13px 24px;font-weight:700;font-size:14px;cursor:pointer;transition:all 0.2s;font-family:'Syne',sans-serif;white-space:nowrap}
-    .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 20px rgba(249,115,22,0.25)}
-    .btn-primary:hover:not(:disabled){opacity:0.9;transform:translateY(-1px)}
-    .btn-primary:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none;background:var(--dim)}
-    .btn-sm{background:rgba(255,255,255,0.04);border:1px solid var(--border)!important;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif}
-    .btn-sm:hover{border-color:var(--accent)!important;color:var(--accent)}
+    .srow{display:flex;gap:10px}
+    input[type=text],input[type=password]{background:#0a0914;border:1px solid var(--dim);border-radius:10px;padding:13px 16px;font-size:14px;color:var(--text);font-family:'DM Sans',sans-serif;transition:border-color .2s;width:100%}
+    input:focus{outline:none;border-color:var(--accent)}input::placeholder{color:#2e2a45}
+    .btn-p{border:none;border-radius:10px;padding:13px 22px;font-weight:700;font-size:14px;cursor:pointer;font-family:'Syne',sans-serif;white-space:nowrap;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 20px rgba(249,115,22,.25);transition:all .2s}
+    .btn-p:hover:not(:disabled){opacity:.9;transform:translateY(-1px)}
+    .btn-p:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none;background:var(--dim)}
+    .btn-s{background:rgba(255,255,255,.04);border:1px solid var(--border)!important;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+    .btn-s:hover{border-color:var(--accent)!important;color:var(--accent)}
     .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;align-items:center}
-    .chip{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--muted);cursor:pointer;transition:all 0.2s}
-    .chip:hover{border-color:var(--accent);color:var(--accent);background:rgba(249,115,22,0.06)}
-    .loading{text-align:center;padding:60px 20px;animation:fadeIn 0.3s ease}
-    .spinner{width:48px;height:48px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;margin:0 auto 20px;animation:spin 0.9s linear infinite}
-    .step-pills{display:flex;justify-content:center;gap:8px;margin-top:20px;flex-wrap:wrap}
-    .step-pill{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:5px 13px;font-size:11px;color:var(--dim);transition:all 0.3s}
-    .step-pill.active{color:var(--accent);border-color:rgba(249,115,22,0.35);background:rgba(249,115,22,0.07)}
-    .error-box{background:rgba(220,38,38,0.08);border:1px solid rgba(220,38,38,0.2);border-radius:12px;padding:16px 20px;color:#f87171;font-size:13px;text-align:center;animation:fadeIn 0.3s ease}
-    .results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-    .results-title{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--white)}
-    .results-title span{color:var(--accent)}
-    .table-wrap{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;animation:fadeIn 0.4s ease}
-    table{width:100%;border-collapse:collapse}
+    .chip{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--muted);cursor:pointer;transition:all .2s}
+    .chip:hover{border-color:var(--accent);color:var(--accent);background:rgba(249,115,22,.06)}
+    .loading{text-align:center;padding:60px 20px;display:none}
+    .spinner{width:48px;height:48px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;margin:0 auto 20px;animation:spin .9s linear infinite}
+    .err{background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);border-radius:12px;padding:16px 20px;color:#f87171;font-size:13px;text-align:center;display:none;margin-bottom:16px}
+    .rhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+    .rtitle{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--white)}
+    .rtitle span{color:var(--accent)}
+    .twrap{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;overflow-x:auto}
+    table{width:100%;border-collapse:collapse;min-width:600px}
     thead th{text-align:left;padding:11px 15px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);border-bottom:1px solid var(--dim)}
-    tbody tr{border-bottom:1px solid #0e0d1a;transition:background 0.15s}
+    tbody tr{border-bottom:1px solid #0e0d1a;transition:background .15s}
     tbody tr:last-child{border-bottom:none}
-    tbody tr:hover td{background:rgba(249,115,22,0.035)}
+    tbody tr:hover td{background:rgba(249,115,22,.035)}
     td{padding:13px 15px;vertical-align:top}
-    .lead-name{font-weight:700;color:var(--white);font-size:14px}
-    .lead-type{display:inline-block;background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.2);color:var(--accent);font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-top:4px}
-    .lead-contact{color:var(--blue);font-size:12px;word-break:break-all}
-    .lead-source{color:var(--dim);font-size:11px;margin-top:3px}
-    .lead-relevance{color:#5a4a6a;font-size:11.5px;font-style:italic;max-width:180px;line-height:1.5}
-    .notas{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin-top:16px;font-size:12px;color:var(--muted);font-style:italic}
-    .empty{text-align:center;padding:70px 20px;animation:fadeIn 0.5s ease}
-    .empty-icon{font-size:52px;opacity:0.15;margin-bottom:16px}
-    .empty-text{font-size:14px;color:#3a2a55;line-height:1.8}
-    .hist-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:10px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:space-between}
-    .hist-item:hover{background:rgba(255,255,255,0.04);border-color:#2a2845}
-    .api-status{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;margin-top:12px}
-    .api-status.ok{background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.25);color:var(--green)}
-    .api-status.fail{background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.25);color:#f87171}
+    .lname{font-weight:700;color:var(--white);font-size:14px}
+    .ltype{display:inline-block;background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.2);color:var(--accent);font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-top:4px}
+    .lcontact{color:var(--blue);font-size:12px;word-break:break-all}
+    .lsource{color:var(--dim);font-size:11px;margin-top:3px}
+    .lrel{color:#5a4a6a;font-size:11.5px;font-style:italic;max-width:180px;line-height:1.5}
+    .notas{background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin-top:16px;font-size:12px;color:var(--muted);font-style:italic}
+    .empty{text-align:center;padding:70px 20px}
+    .eicon{font-size:52px;opacity:.15;margin-bottom:16px}
+    .etext{font-size:14px;color:#3a2a55;line-height:1.8}
+    .hitem{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:10px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:space-between}
+    .hitem:hover{background:rgba(255,255,255,.04)}
+    .asta{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;margin-top:12px}
+    .asta.ok{background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25);color:var(--green)}
+    .asta.fail{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.25);color:#f87171}
     .dot{width:7px;height:7px;border-radius:50%}
     .dot.ok{background:var(--green);box-shadow:0 0 6px var(--green)}
     .dot.fail{background:#f87171}
     @keyframes spin{to{transform:rotate(360deg)}}
     @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-    @media(max-width:640px){.header{padding:14px 16px}.main{padding:20px 12px}.results-header{flex-direction:column;align-items:flex-start;gap:10px}thead th:nth-child(5),td:nth-child(5){display:none}}
   </style>
 </head>
 <body>
@@ -80,27 +71,27 @@
 <div class="header">
   <div class="logo">🔥</div>
   <div>
-    <div class="header-title">FÉNIX LEAD FINDER</div>
-    <div class="header-sub">Prospección inteligente · Powered by Claude AI</div>
+    <div class="htitle">FÉNIX LEAD FINDER</div>
+    <div class="hsub">Prospección inteligente · Powered by Claude AI</div>
   </div>
   <div class="badge">FÉNIX ACADEMY</div>
 </div>
 
 <div class="tabs">
-  <button class="tab active" data-tab="buscar">🔍 Buscar</button>
-  <button class="tab" data-tab="historial" id="tab-historial-btn">📋 Historial (0)</button>
-  <button class="tab" data-tab="config">⚙️ Config</button>
+  <button class="tab active" onclick="switchTab('buscar',this)">🔍 Buscar</button>
+  <button class="tab" id="tabHistBtn" onclick="switchTab('historial',this)">📋 Historial (0)</button>
+  <button class="tab" onclick="switchTab('config',this)">⚙️ Config</button>
 </div>
 
 <div class="main">
 
   <!-- BUSCAR -->
   <div id="pane-buscar">
-    <div class="card" style="margin-bottom:24px">
+    <div class="card">
       <div class="label">¿Qué tipo de leads buscas?</div>
-      <div class="search-row">
-        <input type="text" id="queryInput" placeholder="Ej: Emprendedores latinos en Miami con negocio propio..." />
-        <button class="btn btn-primary" id="btnBuscar" onclick="buscar()">🔍 Buscar Leads</button>
+      <div class="srow">
+        <input type="text" id="qInput" placeholder="Ej: Emprendedores latinos en Miami con negocio propio..."/>
+        <button class="btn-p" id="btnB" onclick="buscar()">🔍 Buscar Leads</button>
       </div>
       <div class="chips">
         <span style="font-size:11px;color:var(--dim)">Ejemplos:</span>
@@ -113,321 +104,255 @@
       </div>
     </div>
 
-    <div id="loadingState" style="display:none" class="loading">
+    <div class="loading" id="loadDiv">
       <div class="spinner"></div>
-      <div id="stepLabel" style="color:var(--accent);font-family:'Syne',sans-serif;font-weight:800;font-size:15px;margin-bottom:8px">BUSCANDO EN LA WEB...</div>
-      <div id="stepSub" style="color:var(--muted);font-size:13px">Claude está rastreando fuentes en tiempo real</div>
-      <div class="step-pills">
-        <div class="step-pill active" id="pill1">1. Buscar en web</div>
-        <div class="step-pill" id="pill2">2. Extraer datos</div>
-        <div class="step-pill" id="pill3">3. Estructurar resultados</div>
-      </div>
+      <div style="color:var(--accent);font-family:'Syne',sans-serif;font-weight:800;font-size:15px;margin-bottom:8px">BUSCANDO EN LA WEB...</div>
+      <div style="color:var(--muted);font-size:13px">Claude está rastreando fuentes en tiempo real</div>
     </div>
 
-    <div id="errorBox" style="display:none" class="error-box">
-      <span id="errorMsg"></span>
-      <button class="btn-sm" style="margin-left:12px" onclick="buscar()">Reintentar</button>
+    <div class="err" id="errDiv">
+      <span id="errMsg"></span>
+      <button class="btn-s" style="margin-left:12px" onclick="buscar()">Reintentar</button>
     </div>
 
-    <div id="resultsSection" style="display:none">
-      <div class="results-header">
-        <div>
-          <span class="results-title"><span id="leadsCount">0</span> leads encontrados</span>
-          <span style="font-size:12px;color:var(--muted);margin-left:10px" id="resultsQuery"></span>
-        </div>
+    <div id="resDiv" style="display:none">
+      <div class="rhead">
+        <div><span class="rtitle"><span id="resCount">0</span> leads encontrados</span>
+        <span style="font-size:12px;color:var(--muted);margin-left:10px" id="resQuery"></span></div>
         <div style="display:flex;gap:8px">
-          <button class="btn-sm" id="btnCopy" onclick="copiar()">📋 Copiar</button>
-          <button class="btn-sm" onclick="exportCSV()">⬇️ CSV</button>
+          <button class="btn-s" id="btnCopy" onclick="copiar()">📋 Copiar</button>
+          <button class="btn-s" onclick="exportCSV(currentLeads,currentQuery)">⬇️ CSV</button>
         </div>
       </div>
-      <div class="table-wrap">
+      <div class="twrap">
         <table>
           <thead><tr><th>#</th><th>Nombre / Tipo</th><th>Ubicación</th><th>Contacto</th><th>Relevancia</th></tr></thead>
           <tbody id="leadsBody"></tbody>
         </table>
       </div>
-      <div class="notas" id="notasBox" style="display:none">
+      <div class="notas" id="notasDiv" style="display:none">
         <span style="font-style:normal;font-weight:700;font-size:10px;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:4px">📝 Notas</span>
         <span id="notasText"></span>
       </div>
     </div>
 
-    <div class="empty" id="emptyState">
-      <div class="empty-icon">🔥</div>
-      <p class="empty-text">Describe el tipo de prospecto ideal para Fénix Academy<br/>y Claude saldrá a buscarlos en la web en tiempo real</p>
+    <div class="empty" id="emptyDiv">
+      <div class="eicon">🔥</div>
+      <p class="etext">Describe el tipo de prospecto ideal para Fénix Academy<br/>y Claude saldrá a buscarlos en la web en tiempo real</p>
     </div>
   </div>
 
   <!-- HISTORIAL -->
   <div id="pane-historial" style="display:none">
-    <div id="historialList">
-      <div class="empty"><div class="empty-icon">📋</div><p class="empty-text">Aún no hay búsquedas.<br/>Haz tu primera búsqueda y aparecerá aquí.</p></div>
+    <div id="histList">
+      <div class="empty"><div class="eicon">📋</div><p class="etext">Aún no hay búsquedas.<br/>Haz tu primera búsqueda y aparecerá aquí.</p></div>
     </div>
   </div>
 
   <!-- CONFIG -->
   <div id="pane-config" style="display:none">
-    <div class="card">
+    <div class="card" style="margin-bottom:0">
       <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--white);margin-bottom:6px">🔑 API Key de Anthropic</div>
       <div style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.6">
-        En producción (EasyPanel) la clave va en la variable de entorno <code style="background:rgba(255,255,255,0.07);padding:2px 6px;border-radius:4px">ANTHROPIC_API_KEY</code>.<br/>
-        Para modo local puedes ingresarla aquí:
+        En EasyPanel la clave va en Environment Variables como <code style="background:rgba(255,255,255,.07);padding:2px 6px;border-radius:4px">ANTHROPIC_API_KEY</code>.<br/>
+        Para pruebas locales puedes ingresarla aquí:
       </div>
       <div style="display:flex;gap:10px;align-items:center">
-        <input type="password" id="apiKeyInput" placeholder="sk-ant-api03-..." style="max-width:420px" />
-        <button class="btn btn-primary" style="padding:13px 20px" onclick="guardarKey()">Guardar</button>
+        <input type="password" id="keyInput" placeholder="sk-ant-api03-..." style="max-width:420px"/>
+        <button class="btn-p" style="padding:13px 20px" onclick="saveKey()">Guardar</button>
       </div>
-      <div id="apiStatus"></div>
-      <div style="margin-top:16px;padding:14px 16px;background:rgba(249,115,22,0.06);border:1px solid rgba(249,115,22,0.15);border-radius:10px;font-size:12px;color:var(--muted);line-height:1.7">
-        💡 <strong style="color:var(--text)">EasyPanel:</strong> Configura <code style="font-size:11px">ANTHROPIC_API_KEY=sk-ant-...</code> en Environment Variables y redeploy.
-      </div>
+      <div id="keyStatus"></div>
       <hr style="border:none;border-top:1px solid var(--border);margin:24px 0"/>
       <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--white);margin-bottom:6px">🗑️ Limpiar historial</div>
-      <button class="btn-sm" onclick="limpiarH()" style="border-color:rgba(220,38,38,0.3)!important;color:#f87171">Limpiar historial</button>
+      <button class="btn-s" onclick="clearH()" style="border-color:rgba(220,38,38,.3)!important;color:#f87171">Limpiar historial</button>
     </div>
   </div>
 
 </div>
 
 <script>
-// ── STATE ──────────────────────────────────────────────────────────────────
-let currentLeads = [], currentQuery = "";
-let historial = JSON.parse(localStorage.getItem("fx_hist") || "[]");
+var currentLeads = [], currentQuery = "";
+var hist = JSON.parse(localStorage.getItem("fx_h") || "[]");
 
-// ── TABS ───────────────────────────────────────────────────────────────────
-document.querySelectorAll(".tab").forEach(btn => {
-  btn.addEventListener("click", function() {
-    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-    this.classList.add("active");
-    const name = this.dataset.tab;
-    ["buscar","historial","config"].forEach(p => {
-      document.getElementById("pane-"+p).style.display = p === name ? "block" : "none";
-    });
-    if (name === "historial") renderH();
+// TABS
+function switchTab(name, el) {
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  el.classList.add("active");
+  ["buscar","historial","config"].forEach(p => {
+    document.getElementById("pane-"+p).style.display = p===name ? "block" : "none";
   });
-});
+  if (name === "historial") renderHist();
+}
 
-function setQ(el) { document.getElementById("queryInput").value = el.textContent; }
+function setQ(el) { document.getElementById("qInput").value = el.textContent; }
+
 function show(id) { document.getElementById(id).style.display = "block"; }
 function hide(id) { document.getElementById(id).style.display = "none"; }
 
-function setStep(s) {
-  const labels = {
-    searching: ["🔍 BUSCANDO EN LA WEB...", "Claude está rastreando fuentes en tiempo real"],
-    formatting: ["⚙️ ESTRUCTURANDO RESULTADOS...", "Organizando los leads encontrados..."]
-  };
-  document.getElementById("stepLabel").textContent = labels[s][0];
-  document.getElementById("stepSub").textContent = labels[s][1];
-  document.getElementById("pill1").classList.toggle("active", s === "searching");
-  document.getElementById("pill2").classList.toggle("active", s === "formatting");
-  document.getElementById("pill3").classList.toggle("active", s === "formatting");
-}
-
-// ── API CALL ───────────────────────────────────────────────────────────────
+// API CALL
 async function callClaude(payload) {
-  // If served from Node.js server, use proxy
   if (window.location.protocol !== "file:") {
-    const res = await fetch("/api/claude", {
+    // EasyPanel mode - use proxy
+    var res = await fetch("/api/claude", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (!res.ok) {
-      const msg = typeof data.error === "string" ? data.error : JSON.stringify(data.error || data);
-      throw new Error(msg);
-    }
+    var data = await res.json();
+    if (!res.ok) throw new Error(typeof data.error === "string" ? data.error : JSON.stringify(data.error || data));
     return data;
   }
-  // Local file mode
-  const key = localStorage.getItem("fx_key") || "";
+  // Local mode
+  var key = localStorage.getItem("fx_k") || "";
   if (!key) throw new Error("Configura tu API Key en ⚙️ Config");
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
+  var res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       "x-api-key": key,
       "anthropic-version": "2023-06-01",
       "anthropic-beta": "web-search-2025-03-05",
-      "anthropic-dangerous-direct-browser-access": "true",
+      "anthropic-dangerous-direct-browser-access": "true"
     },
-    body: JSON.stringify(payload),
+    body: JSON.stringify(payload)
   });
-  const data = await res.json();
-  if (!res.ok) {
-    const msg = typeof data.error === "string" ? data.error : (data.error?.message || JSON.stringify(data.error || data));
-    throw new Error(msg);
-  }
+  var data = await res.json();
+  if (!res.ok) throw new Error(data.error?.message || JSON.stringify(data.error || data));
   return data;
 }
 
-// Extract all text from Claude response (handles tool_use blocks too)
-function extractText(data) {
-  if (!data || !data.content) return "";
-  return data.content
-    .filter(b => b.type === "text")
-    .map(b => b.text || "")
-    .join("\n")
-    .trim();
-}
-
-// ── BUSCAR ─────────────────────────────────────────────────────────────────
+// BUSCAR - single call
 async function buscar() {
-  const query = document.getElementById("queryInput").value.trim();
+  var query = document.getElementById("qInput").value.trim();
   if (!query) return;
   currentQuery = query;
 
-  hide("emptyState"); hide("errorBox"); hide("resultsSection");
-  show("loadingState");
-  document.getElementById("btnBuscar").disabled = true;
+  hide("emptyDiv"); hide("errDiv"); hide("resDiv");
+  show("loadDiv");
+  document.getElementById("btnB").disabled = true;
 
-try {
-    setStep("searching");
-    const resp = await callClaude({
+  try {
+    var resp = await callClaude({
       model: "claude-haiku-4-5-20251001",
       max_tokens: 1000,
       tools: [{ type: "web_search_20250305", name: "web_search" }],
-      system: `Busca leads para Fénix Academy (academia de negocios para emprendedores hispanos 28-45 años).
-Busca: ${query}
-Responde ÚNICAMENTE con este JSON puro, sin texto extra, sin markdown:
-{"leads":[{"nombre":"string","tipo":"string","ubicacion":"string","contacto":"string","fuente":"string","relevancia":"string"}],"notas":"string"}
-Máximo 6 leads.`,
-      messages: [{ role: "user", content: `Busca y devuelve JSON de leads: ${query}` }],
+      system: "Eres un buscador de leads para Fénix Academy (academia de negocios para emprendedores hispanos 28-45 años). Busca prospectos reales y devuelve ÚNICAMENTE este JSON sin markdown ni texto extra:\n{\"leads\":[{\"nombre\":\"string\",\"tipo\":\"string\",\"ubicacion\":\"string\",\"contacto\":\"string\",\"fuente\":\"string\",\"relevancia\":\"string\"}],\"notas\":\"string\"}\nMáximo 6 leads.",
+      messages: [{ role: "user", content: "Busca leads de: " + query }]
     });
 
-    const texto = extractText(resp).replace(/```json|```/gi,"").trim();
-    const match = texto.match(/\{[\s\S]*\}/);
-    if (!match) throw new Error("No se encontraron leads. Intenta con otros términos.");
-    const parsed = JSON.parse(match[0]);
-    const leads = parsed.leads || [];
+    // Extract text from all blocks
+    var texto = (resp.content || [])
+      .filter(function(b){ return b.type === "text"; })
+      .map(function(b){ return b.text || ""; })
+      .join("")
+      .replace(/```json|```/gi, "")
+      .trim();
+
+    var match = texto.match(/\{[\s\S]*\}/);
+    if (!match) throw new Error("No se encontraron resultados. Intenta con términos más específicos.");
+
+    var parsed = JSON.parse(match[0]);
+    var leads = parsed.leads || [];
     if (!leads.length) throw new Error("No se encontraron leads. Intenta con otros términos.");
 
     currentLeads = leads;
     renderLeads(leads, query, parsed.notas || "");
-    saveH(query, leads, parsed.notas || "");
+    saveHist(query, leads, parsed.notas || "");
 
-
-    const formatText = extractText(formatResp)
-      .replace(/```json|```/gi, "")
-      .trim();
-
-    const match = formatText.match(/\{[\s\S]*\}/);
-    if (!match) throw new Error("No se pudo parsear la respuesta. Intenta de nuevo.");
-
-    const parsed = JSON.parse(match[0]);
-    const leads = parsed.leads || [];
-    if (leads.length === 0) throw new Error("No se encontraron leads. Intenta con términos más específicos.");
-
-    currentLeads = leads;
-    renderLeads(leads, query, parsed.notas || "");
-    saveH(query, leads, parsed.notas || "");
-
-  } catch (e) {
-    hide("loadingState");
-    document.getElementById("errorMsg").textContent = e.message || "Error desconocido";
-    show("errorBox");
+  } catch(e) {
+    document.getElementById("errMsg").textContent = e.message || "Error desconocido";
+    show("errDiv");
   } finally {
-    hide("loadingState");
-    document.getElementById("btnBuscar").disabled = false;
+    hide("loadDiv");
+    document.getElementById("btnB").disabled = false;
   }
 }
 
-// ── RENDER ─────────────────────────────────────────────────────────────────
+// RENDER
 function esc(s) {
   return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 }
 
 function renderLeads(leads, query, notas) {
-  document.getElementById("leadsCount").textContent = leads.length;
-  document.getElementById("resultsQuery").textContent = `"${query}"`;
-  document.getElementById("leadsBody").innerHTML = leads.map((l,i) => `
-    <tr>
-      <td style="color:var(--dim);font-weight:700;font-size:12px">${i+1}</td>
-      <td><div class="lead-name">${esc(l.nombre)}</div><div class="lead-type">${esc(l.tipo)}</div></td>
-      <td style="color:#7a6a8a;font-size:13px">${esc(l.ubicacion)}</td>
-      <td><div class="lead-contact">${esc(l.contacto)}</div><div class="lead-source">${esc(l.fuente)}</div></td>
-      <td class="lead-relevance">${esc(l.relevancia)}</td>
-    </tr>`).join("");
-  if (notas) { document.getElementById("notasText").textContent = notas; show("notasBox"); }
-  else hide("notasBox");
-  hide("emptyState");
-  show("resultsSection");
+  document.getElementById("resCount").textContent = leads.length;
+  document.getElementById("resQuery").textContent = '"' + query + '"';
+  document.getElementById("leadsBody").innerHTML = leads.map(function(l,i){
+    return "<tr><td style='color:var(--dim);font-weight:700;font-size:12px'>"+(i+1)+"</td><td><div class='lname'>"+esc(l.nombre)+"</div><div class='ltype'>"+esc(l.tipo)+"</div></td><td style='color:#7a6a8a;font-size:13px'>"+esc(l.ubicacion)+"</td><td><div class='lcontact'>"+esc(l.contacto)+"</div><div class='lsource'>"+esc(l.fuente)+"</div></td><td class='lrel'>"+esc(l.relevancia)+"</td></tr>";
+  }).join("");
+  if (notas) { document.getElementById("notasText").textContent = notas; show("notasDiv"); }
+  else hide("notasDiv");
+  hide("emptyDiv");
+  show("resDiv");
 }
 
-// ── HISTORIAL ──────────────────────────────────────────────────────────────
-function saveH(query, leads, notas) {
-  historial.unshift({ id: Date.now(), query, leads, notas, fecha: new Date().toLocaleString("es-MX",{dateStyle:"short",timeStyle:"short"}) });
-  if (historial.length > 20) historial = historial.slice(0,20);
-  localStorage.setItem("fx_hist", JSON.stringify(historial));
-  document.getElementById("tab-historial-btn").textContent = `📋 Historial (${historial.length})`;
+// HISTORIAL
+function saveHist(query, leads, notas) {
+  hist.unshift({ id: Date.now(), query: query, leads: leads, notas: notas, fecha: new Date().toLocaleString("es-MX",{dateStyle:"short",timeStyle:"short"}) });
+  if (hist.length > 20) hist = hist.slice(0,20);
+  localStorage.setItem("fx_h", JSON.stringify(hist));
+  document.getElementById("tabHistBtn").textContent = "📋 Historial ("+hist.length+")";
 }
 
-function renderH() {
-  const list = document.getElementById("historialList");
-  if (!historial.length) { list.innerHTML = `<div class="empty"><div class="empty-icon">📋</div><p class="empty-text">Aún no hay búsquedas.</p></div>`; return; }
-  list.innerHTML = historial.map(item => `
-    <div class="hist-item" onclick="loadH(${item.id})">
-      <div>
-        <div style="font-family:'Syne',sans-serif;font-weight:700;color:var(--white);font-size:14px;margin-bottom:4px">"${esc(item.query)}"</div>
-        <div style="font-size:12px;color:var(--muted)">${item.fecha} · <span style="color:var(--accent)">${item.leads.length} leads</span></div>
-      </div>
-      <div style="display:flex;gap:8px">
-        <button class="btn-sm" onclick="event.stopPropagation();dlCSV(${item.id})">⬇️ CSV</button>
-        <button class="btn-sm" style="border-color:rgba(249,115,22,0.25)!important;color:var(--accent)" onclick="loadH(${item.id})">Ver →</button>
-      </div>
-    </div>`).join("");
-  document.getElementById("tab-historial-btn").textContent = `📋 Historial (${historial.length})`;
+function renderHist() {
+  var el = document.getElementById("histList");
+  if (!hist.length) { el.innerHTML = "<div class='empty'><div class='eicon'>📋</div><p class='etext'>Aún no hay búsquedas.</p></div>"; return; }
+  el.innerHTML = hist.map(function(item){
+    return "<div class='hitem' onclick='loadHist("+item.id+")'><div><div style='font-family:Syne,sans-serif;font-weight:700;color:var(--white);font-size:14px;margin-bottom:4px'>\""+esc(item.query)+"\"</div><div style='font-size:12px;color:var(--muted)'>"+item.fecha+" · <span style='color:var(--accent)'>"+item.leads.length+" leads</span></div></div><div style='display:flex;gap:8px'><button class='btn-s' onclick='event.stopPropagation();exportCSV("+JSON.stringify(item.leads).replace(/'/g,"&#39;")+",\""+esc(item.query)+"\")'>⬇️ CSV</button><button class='btn-s' style='color:var(--accent)' onclick='loadHist("+item.id+")'>Ver →</button></div></div>";
+  }).join("");
+  document.getElementById("tabHistBtn").textContent = "📋 Historial ("+hist.length+")";
 }
 
-function loadH(id) {
-  const item = historial.find(h => h.id === id);
+function loadHist(id) {
+  var item = hist.find(function(h){ return h.id === id; });
   if (!item) return;
   currentLeads = item.leads; currentQuery = item.query;
-  document.getElementById("queryInput").value = item.query;
+  document.getElementById("qInput").value = item.query;
   renderLeads(item.leads, item.query, item.notas);
-  document.querySelectorAll(".tab")[0].click();
+  switchTab("buscar", document.querySelectorAll(".tab")[0]);
 }
 
-function limpiarH() {
+function clearH() {
   if (!confirm("¿Borrar todo el historial?")) return;
-  historial = []; localStorage.removeItem("fx_hist"); renderH();
+  hist = []; localStorage.removeItem("fx_h"); renderHist();
 }
 
-// ── EXPORT ─────────────────────────────────────────────────────────────────
-function exportCSV() { makeCSV(currentLeads, currentQuery); }
-function dlCSV(id) { const item = historial.find(h=>h.id===id); if(item) makeCSV(item.leads, item.query); }
-
-function makeCSV(leads, name) {
-  const cols = ["#","Nombre","Tipo","Ubicación","Contacto","Fuente","Relevancia"];
-  const rows = leads.map((l,i)=>[i+1,l.nombre,l.tipo,l.ubicacion,l.contacto,l.fuente,l.relevancia].map(v=>`"${String(v||"").replace(/"/g,'""')}"`).join(","));
-  const blob = new Blob([[cols.join(","),...rows].join("\n")],{type:"text/csv;charset=utf-8;"});
-  Object.assign(document.createElement("a"),{href:URL.createObjectURL(blob),download:`leads-fenix-${(name||"").slice(0,20).replace(/\s/g,"-")}.csv`}).click();
+// EXPORT
+function exportCSV(leads, name) {
+  var cols = ["#","Nombre","Tipo","Ubicación","Contacto","Fuente","Relevancia"];
+  var rows = leads.map(function(l,i){
+    return [i+1,l.nombre,l.tipo,l.ubicacion,l.contacto,l.fuente,l.relevancia].map(function(v){ return '"'+String(v||"").replace(/"/g,'""')+'"'; }).join(",");
+  });
+  var blob = new Blob([[cols.join(",")].concat(rows).join("\n")],{type:"text/csv;charset=utf-8;"});
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "leads-fenix-"+(name||"").slice(0,20).replace(/\s/g,"-")+".csv";
+  a.click();
 }
 
 function copiar() {
-  navigator.clipboard.writeText(currentLeads.map((l,i)=>`${i+1}. ${l.nombre} | ${l.tipo} | ${l.ubicacion} | ${l.contacto}`).join("\n")).then(()=>{
-    const b = document.getElementById("btnCopy");
+  navigator.clipboard.writeText(currentLeads.map(function(l,i){ return (i+1)+". "+l.nombre+" | "+l.tipo+" | "+l.ubicacion+" | "+l.contacto; }).join("\n")).then(function(){
+    var b = document.getElementById("btnCopy");
     b.textContent = "✓ Copiado"; b.style.color = "var(--green)";
-    setTimeout(()=>{ b.textContent="📋 Copiar"; b.style.color=""; },2000);
+    setTimeout(function(){ b.textContent="📋 Copiar"; b.style.color=""; },2000);
   });
 }
 
-// ── CONFIG ─────────────────────────────────────────────────────────────────
-function guardarKey() {
-  const k = document.getElementById("apiKeyInput").value.trim();
-  if (!k.startsWith("sk-ant-")) { showStatus(false,"Clave inválida. Debe empezar con sk-ant-"); return; }
-  localStorage.setItem("fx_key", k);
-  document.getElementById("apiKeyInput").value = "";
-  showStatus(true,"API Key guardada ✓");
+// CONFIG
+function saveKey() {
+  var k = document.getElementById("keyInput").value.trim();
+  if (!k.startsWith("sk-ant-")) { showKS(false,"Clave inválida. Debe empezar con sk-ant-"); return; }
+  localStorage.setItem("fx_k", k);
+  document.getElementById("keyInput").value = "";
+  showKS(true,"API Key guardada ✓");
 }
-function showStatus(ok, msg) {
-  document.getElementById("apiStatus").innerHTML = `<div class="api-status ${ok?'ok':'fail'}"><div class="dot ${ok?'ok':'fail'}"></div>${msg}</div>`;
+function showKS(ok, msg) {
+  document.getElementById("keyStatus").innerHTML = "<div class='asta "+(ok?"ok":"fail")+"'><div class='dot "+(ok?"ok":"fail")+"'></div>"+msg+"</div>";
 }
 
-// ── INIT ───────────────────────────────────────────────────────────────────
-document.getElementById("tab-historial-btn").textContent = `📋 Historial (${historial.length})`;
-document.getElementById("queryInput").addEventListener("keydown", e => { if(e.key==="Enter") buscar(); });
-if (localStorage.getItem("fx_key")) showStatus(true,"API Key configurada ✓");
+// INIT
+document.getElementById("tabHistBtn").textContent = "📋 Historial ("+hist.length+")";
+document.getElementById("qInput").addEventListener("keydown", function(e){ if(e.key==="Enter") buscar(); });
+if (localStorage.getItem("fx_k")) showKS(true,"API Key configurada ✓");
 </script>
 </body>
 </html>
