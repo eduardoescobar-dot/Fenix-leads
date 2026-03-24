@@ -286,7 +286,7 @@ async function buscar() {
     setStep("searching");
     const searchResp = await callClaude({
       model: "claude-sonnet-4-20250514",
-      max_tokens: 5000,
+      max_tokens: 1500,
       tools: [{ type: "web_search_20250305", name: "web_search" }],
       system: `Eres un experto en prospección de leads para Fénix Academy, plataforma de educación empresarial para emprendedores hispanos de 28-45 años.
 Busca en internet y encuentra prospectos REALES para: ${query}
