@@ -281,7 +281,7 @@ async function buscar() {
   show("loadingState");
   document.getElementById("btnBuscar").disabled = true;
 
-  try {
+try {
     // STEP 1: search
     setStep("searching");
     const searchResp = await callClaude({
@@ -298,6 +298,9 @@ Encuentra mínimo 8 prospectos reales y verificables.`,
     const rawText = extractText(searchResp);
     if (!rawText) throw new Error("No se obtuvieron resultados. La búsqueda web no devolvió texto.");
 
+    // Esperar 4 segundos antes del segundo llamado
+    await new Promise(r => setTimeout(r, 4000));
+
     // STEP 2: format
     setStep("formatting");
     const formatResp = await callClaude({
@@ -309,6 +312,7 @@ Formato exacto:
 {"leads":[{"nombre":"string","tipo":"string","ubicacion":"string","contacto":"string","fuente":"string","relevancia":"string"}],"notas":"string"}`,
       messages: [{ role: "user", content: `Convierte a JSON:\n\n${rawText}` }],
     });
+
 
     const formatText = extractText(formatResp)
       .replace(/```json|```/gi, "")
